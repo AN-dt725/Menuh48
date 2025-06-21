@@ -3,28 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>BẢNG GIÁ TẠP HÓA H48</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f2f2f2;
+      background-color: #f8f9fa;
       font-family: 'Segoe UI', sans-serif;
-      padding: 30px;
+      padding: 20px;
     }
     .title {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: bold;
       color: #2c3e50;
       margin-bottom: 30px;
       text-align: center;
     }
-    .search-section {
-      margin-bottom: 30px;
+    .search-input {
+      font-size: 1.5rem;
+      padding: 15px;
     }
-    .result-table th, .result-table td {
-      vertical-align: middle !important;
+    .search-button {
+      font-size: 1.3rem;
+      padding: 15px 30px;
     }
-    .result-table thead {
-      background-color: #e9ecef;
+    .table th, .table td {
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+    @media (max-width: 576px) {
+      .search-input, .search-button {
+        width: 100%;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
@@ -32,34 +42,36 @@
   <div class="container">
     <div class="title">BẢNG GIÁ TẠP HÓA H48</div>
 
-    <form method="POST" class="row g-3 justify-content-center search-section">
-      <div class="col-md-6">
-        <input type="text" name="keyword" class="form-control" placeholder="Nhập tên sản phẩm cần tìm..." value="{{ keyword }}" required>
+    <form method="POST" class="row justify-content-center">
+      <div class="col-md-6 col-sm-12">
+        <input type="text" name="keyword" class="form-control search-input" placeholder="Nhập tên hoặc loại sản phẩm..." value="{{ keyword }}" required>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-dark">🔍 Tìm kiếm</button>
+        <button type="submit" class="btn btn-dark search-button">🔍 Tìm kiếm</button>
       </div>
     </form>
 
     {% if ket_qua is not none and not ket_qua.empty %}
-      <table class="table table-bordered result-table">
-        <thead>
-          <tr>
-            <th scope="col">Tên mặt hàng</th>
-            <th scope="col">Loại hàng</th>
-            <th scope="col">Giá</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i, row in ket_qua.iterrows() %}
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+          <thead class="table-light">
             <tr>
-              <td>{{ row['Tên mặt hàng'] }}</td>
-              <td>{{ row['Loại hàng'] }}</td>
-              <td>{{ row['Giá'] }}</td>
+              <th>Tên mặt hàng</th>
+              <th>Loại hàng</th>
+              <th>Giá</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for i, row in ket_qua.iterrows() %}
+              <tr>
+                <td>{{ row['Tên mặt hàng'] }}</td>
+                <td>{{ row['Loại hàng'] }}</td>
+                <td>{{ row['Giá'] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     {% elif keyword %}
       <div class="alert alert-warning text-center mt-4">
         Không tìm thấy sản phẩm nào với từ khóa: <strong>{{ keyword }}</strong>
@@ -68,5 +80,6 @@
   </div>
 </body>
 </html>
+
 
 
