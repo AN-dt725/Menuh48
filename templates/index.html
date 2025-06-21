@@ -12,14 +12,15 @@
     </form>
 
     {% if ket_qua is not none and not ket_qua.empty %}
-        <h3>Kết quả tìm kiếm:</h3>
-        <ul>
-        {% for i, row in ket_qua.iterrows() %}
-            <li><strong>{{ row['Tên mặt hàng'] }}</strong> ({{ row['Loại hàng'] }}): {{ row['Giá'] }}</li>
-        {% endfor %}
-        </ul>
-    {% elif keyword %}
-        <p>❌ Không tìm thấy sản phẩm nào với từ khóa: <em>{{ keyword }}</em></p>
-    {% endif %}
+  <h3>Kết quả tìm kiếm:</h3>
+  <ul>
+    {% for i, row in ket_qua.iterrows() %}
+      <li><strong>{{ row["Tên mặt hàng"] }}</strong> ({{ row["Loại hàng"] }}): {{ row["Giá"] }}</li>
+    {% endfor %}
+  </ul>
+{% elif keyword %}
+  <p>❌ Không tìm thấy sản phẩm nào với từ khóa: <em>{{ keyword }}</em></p>
+{% endif %}
+
 </body>
 </html>
