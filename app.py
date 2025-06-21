@@ -13,7 +13,7 @@ def index():
         keyword = request.form["keyword"].strip().lower()
         if keyword:
             ket_qua = df[df["Tên mặt hàng"].str.lower().str.contains(keyword)]
-    return render_template("index.html", ket_qua=ket_qua, keyword=keyword)
+    return render_template("index.html", ket_qua=ket_qua if keyword else None, keyword=keyword)
 
 if __name__ == "__main__":
     app.run()
