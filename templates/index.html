@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tra cứu giá sản phẩm</title>
+</head>
+<body>
+    <h2>📦 Tra cứu giá sản phẩm trong tiệm tạp hóa</h2>
+    <form method="POST">
+        <input type="text" name="keyword" placeholder="Nhập từ khóa..." value="{{ keyword }}" required>
+        <button type="submit">Tìm kiếm</button>
+    </form>
+
+    {% if ket_qua is not none and not ket_qua.empty %}
+        <h3>Kết quả tìm kiếm:</h3>
+        <ul>
+        {% for i, row in ket_qua.iterrows() %}
+            <li><strong>{{ row['Tên mặt hàng'] }}</strong> ({{ row['Loại hàng'] }}): {{ row['Giá'] }}</li>
+        {% endfor %}
+        </ul>
+    {% elif keyword %}
+        <p>❌ Không tìm thấy sản phẩm nào với từ khóa: <em>{{ keyword }}</em></p>
+    {% endif %}
+</body>
+</html>
